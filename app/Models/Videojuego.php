@@ -36,4 +36,20 @@ class Videojuego extends Model
             set: fn($v)=>ucfirst($v),
         );
     }
+
+    public function obtenerIdsGeneros(){
+        $generos = [];
+        foreach ($this->generos as $genero) {
+            $generos[] = $genero->id;
+        }
+        return $generos;
+    }
+
+    public function obtenerIdsConsolas(){
+        $consolas = [];
+        foreach ($this->consolas as $consola) {
+            $consolas[] = $consola->id;
+        }
+        return $consolas;
+    }
 }
