@@ -1,5 +1,7 @@
 <?php
 
+use App\Livewire\Consolas\ShowConsolas;
+use App\Livewire\Generos\ShowGeneros;
 use App\Livewire\Videojuegos\ShowVideojuegos;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +32,5 @@ Route::middleware([
 });
 
 Route::get('/videojuegos', ShowVideojuegos::class)->name('videojuegos.index');
+Route::get('/consolas', ShowConsolas::class)->name('consolas.index');
+Route::get('/generos', ShowGeneros::class)->name('generos.index');

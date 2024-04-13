@@ -45,9 +45,8 @@ class EditarVideojuego extends Form
         $ruta=$this->videojuego->imagen;
         if($this->imagen){
                 Storage::delete($ruta);
+                $ruta = $this->imagen->store('public/videojuegos');
             }
-
-            $ruta=$this->imagen->store('videojuegos');
 
         $this->videojuego->update([
             'titulo' => $this->titulo,
@@ -55,7 +54,7 @@ class EditarVideojuego extends Form
             'fecha_lanzamiento' => $this->fecha_lanzamiento,
             'precio' => $this->precio,
             'imagen' => $ruta,
-            'stock'=>0
+            'stock'=> $this->videojuego->stock,
         ]);
 
         $this->videojuego->generos()->sync($this->generos);
