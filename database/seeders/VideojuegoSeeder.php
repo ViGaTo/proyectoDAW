@@ -18,21 +18,8 @@ class VideojuegoSeeder extends Seeder
         $juegos = Videojuego::factory(50)->create();
 
         foreach ($juegos as $item) {
-            $item->consolas()->attach(self::devolverConsola());
             $item->generos()->attach(self::devolverGenero());
         }
-    }
-
-    private static function devolverConsola(): array
-    {
-        $consolas=[];
-        $consolasId = Consola::pluck('id')->toArray();
-        $arrayIndices = array_rand($consolasId, random_int(2, count($consolasId)));
-        foreach ($arrayIndices as $indice) {
-            $consolas[] = $consolasId[$indice];
-        }
-
-        return $consolas;
     }
 
     private static function devolverGenero(): array

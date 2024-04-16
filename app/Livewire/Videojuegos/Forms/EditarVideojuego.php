@@ -15,7 +15,7 @@ class EditarVideojuego extends Form
     public string $fecha_lanzamiento = '';
     public $imagen;
     public float $precio = 0;
-    public array $consolas = [];
+    public int $consola = 0;
     public array $generos = [];
 
     public function setVideojuego(Videojuego $videojuego)
@@ -25,7 +25,7 @@ class EditarVideojuego extends Form
         $this->descripcion = $videojuego->descripcion;
         $this->fecha_lanzamiento = $videojuego->fecha_lanzamiento;
         $this->precio = $videojuego->precio;
-        $this->consolas = $videojuego->obtenerIdsConsolas();
+        $this->consola = $videojuego->consola_id;
         $this->generos = $videojuego->obtenerIdsGeneros();
     }
 
@@ -36,7 +36,7 @@ class EditarVideojuego extends Form
             'fecha_lanzamiento'=>['required', 'date'],
             'precio'=>['required', 'decimal:0,2', 'min:0', 'max:9999.99'],
             'imagen'=>['nullable', 'image', 'max:2048'],
-            'consolas'=>['required', 'array', 'min:1', 'exists:consolas,id'],
+            'consola'=>['required', 'integer', 'exists:consolas,id'],
             'generos'=>['required', 'array', 'min:1', 'exists:generos,id'],
         ];
     }
@@ -55,13 +55,13 @@ class EditarVideojuego extends Form
             'precio' => $this->precio,
             'imagen' => $ruta,
             'stock'=> $this->videojuego->stock,
+            'consola_id' => $this->consola,
         ]);
 
         $this->videojuego->generos()->sync($this->generos);
-        $this->videojuego->consolas()->sync($this->consolas);
     }
 
     public function limpiarCampos(){
-        $this->reset(['titulo', 'descripcion', 'fecha_lanzamiento', 'precio', 'imagen', 'consolas', 'generos']);
+        $this->reset(['titulo', 'descripcion', 'fecha_lanzamiento', 'precio', 'imagen', 'consola', 'generos']);
     }
 }

@@ -29,13 +29,11 @@ class ShowVideojuegos extends Component
     #[On('videojuego-creado')]
     public function render()
     {
-        $videojuegos = Videojuego::
-            // join('genero_videojuego', 'videojuegos.id', '=', 'genero_videojuego.videojuego_id')
-            // ->join('generos', 'genero_videojuego.genero_id', '=', 'generos.id')
-            //     ->select('videojuegos.*', 'generos.nombre as genero')
-            where(function ($q) {
+        $videojuegos = Videojuego::select('videojuegos.*', 'consolas.nombre as nombre_consola')
+            ->join('consolas', 'videojuegos.consola_id', '=', 'consolas.id')
+            ->where(function ($q) {
                 $q->where('titulo', 'like', "%$this->cadena%")
-                    ->orWhere('fecha_lanzamiento', 'like', "%$this->cadena%");
+                    ->orWhere('nombre_consola', 'like', "%$this->cadena%");
             })
             ->orderBy($this->campo, $this->orden)
             ->paginate(20);

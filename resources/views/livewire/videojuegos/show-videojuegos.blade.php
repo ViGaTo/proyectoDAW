@@ -31,9 +31,7 @@
                             @endforeach
                         </td>
                         <td>
-                            @foreach ($item->consolas as $consola)
-                                {{ $loop->last ? $consola->nombre : $consola->nombre . ', ' }}
-                            @endforeach
+                            {{ $item->nombre_consola}}
                         </td>
                         <td>{{ $item->stock }}</td>
                         <td>{{ $item->fecha_lanzamiento }}</td>
@@ -72,18 +70,37 @@
                 <textarea name="descripcion" id="descripcion" class="w-full" placeholder="Descripción..." wire:model="form.descripcion"></textarea>
                 <x-input-error for="form.descripcion" />
 
-                <x-label for="precio" class="mt-4">
-                    Precio (€)
-                </x-label>
-                <x-input type="number" id="precio" placeholder="Precio..." step="0.01" class="w-full mt-1"
-                    min="0" max="9999.99" wire:model="form.precio" />
-                <x-input-error for="form.precio" />
+                <div class="row">
+                    <div class="col-4">
+                        <x-label for="precio" class="mt-4">
+                            Precio (€)
+                        </x-label>
+                        <x-input type="number" id="precio" placeholder="Precio..." step="0.01" class="w-full mt-1"
+                            min="0" max="9999.99" wire:model="form.precio" />
+                        <x-input-error for="form.precio" />
+                    </div>
 
-                <x-label for="fechaLanzamiento" class="mt-4">
-                    Fecha de lanzamiento
-                </x-label>
-                <x-input type="date" id="fecha_lanzamiento" class="w-full mt-1" wire:model="form.fecha_lanzamiento" />
-                <x-input-error for="form.fecha_lanzamiento" />
+                    <div class="col-4">
+                        <x-label for="fechaLanzamiento" class="mt-4">
+                            Fecha de lanzamiento
+                        </x-label>
+                        <x-input type="date" id="fecha_lanzamiento" class="w-full mt-1" wire:model="form.fecha_lanzamiento" />
+                        <x-input-error for="form.fecha_lanzamiento" />
+                    </div>
+
+                    <div class="col-4">
+                        <x-label for="consola" class="mt-4">
+                            Plataforma
+                        </x-label>
+                        <select id="consola" class="w-full mt-1" wire:model="form.consola">
+                            <option value="">Selecciona una plataforma</option>
+                            @foreach ($consolas as $consola)
+                                <option value="{{ $consola->id }}">{{ $consola->nombre }}</option>
+                            @endforeach
+                        </select>
+                        <x-input-error for="form.consola" />
+                    </div>
+                </div>
 
                 <x-label for="generos" class="mt-4">
                     Géneros
@@ -101,23 +118,6 @@
                     @endforeach
                 </div>
                 <x-input-error for="form.generos" />
-
-                <x-label for="consolas" class="mt-4">
-                    Plataformas
-                </x-label>
-                <div class="flex flex-wrap">
-                    @foreach ($consolas as $consola)
-                        <div class="flex items-center me-auto mt-1">
-                            <input id="{{ $consola->id }}" wire:model="form.consolas" type="checkbox"
-                                value="{{ $consola->id }}"
-                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                            <label for="{{ $consola->id }}"
-                                class="ms-1 text-sm font-medium text-gray-900 dark:text-gray-300 p-2 rounded-xl">
-                                {{ $consola->nombre }}</label>
-                        </div>
-                    @endforeach
-                </div>
-                <x-input-error for="form.consolas" />
 
                 <x-label for="imagenU" class="mt-4">
                     Imagen

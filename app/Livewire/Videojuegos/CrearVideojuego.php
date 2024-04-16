@@ -33,8 +33,8 @@ class CrearVideojuego extends Component
     #[Validate(['required', 'array', 'min:1', 'exists:generos,id'])]
     public array $generos = [];
 
-    #[Validate(['required', 'array', 'min:1', 'exists:consolas,id'])]
-    public array $consolas = [];
+    #[Validate(['required', 'integer', 'min:1', 'exists:consolas,id'])]
+    public int $consola;
 
     public function render()
     {
@@ -53,10 +53,10 @@ class CrearVideojuego extends Component
             'stock' => 0,
             'precio' => $this->precio,
             'imagen' => $this->imagen->store('videojuegos'),
+            'consola_id' => $this->consola,
         ]);
 
         $videojuego->generos()->attach($this->generos);
-        $videojuego->consolas()->attach($this->consolas);
         
         $this->dispatch('videojuego-creado')->to('videojuegos.show-videojuegos');
         $this->dispatch('mensaje', 'Videojuego creado con éxito');
@@ -64,6 +64,6 @@ class CrearVideojuego extends Component
     }
 
     public function cancelarCrear(){
-        $this->reset(['titulo', 'descripcion', 'fecha_lanzamiento', 'precio', 'imagen', 'generos', 'consolas', 'mostrarCrear']);
+        $this->reset(['titulo', 'descripcion', 'fecha_lanzamiento', 'precio', 'imagen', 'generos', 'consola', 'mostrarCrear']);
     }
 }

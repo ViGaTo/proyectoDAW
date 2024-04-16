@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('stock');
             $table->decimal('precio', 8, 2);
             $table->date('fecha_lanzamiento');
+            $table->foreignId('consola_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

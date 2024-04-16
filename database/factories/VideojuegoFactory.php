@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Consola;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -24,6 +25,7 @@ class VideojuegoFactory extends Factory
             'stock'=>random_int(1, 100),
             'precio'=>fake()->randomFloat(2, 1, 79.99),
             'fecha_lanzamiento'=>fake()->date(),
+            'consola_id'=>Consola::all()->random()->id,
         ];
     }
 }
