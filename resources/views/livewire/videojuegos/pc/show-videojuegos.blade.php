@@ -6,7 +6,7 @@
             <i class="mr-2 fas fa-search"></i>
         </div>
         <div class="">
-            @livewire('videojuegos.crear-videojuego')
+            @livewire('videojuegos.pc.crear-videojuego')
         </div>
     </div>
     <div class="overflow-x-auto">

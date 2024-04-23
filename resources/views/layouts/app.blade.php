@@ -59,6 +59,7 @@
                 });
             })
 
+            //Borrar el videojuego
             Livewire.on("confirmarBorrarVideojuego", videojuegoId => {
             Swal.fire({
                 title: "Are you sure?",
@@ -71,6 +72,74 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     Livewire.dispatchTo("videojuegos.show-videojuegos", 'borrarOkVideojuego', videojuegoId)
+                }
+            });
+        })
+
+        //Borrar el videojuego de switch
+        Livewire.on("confirmarBorrarVideojuegoNintendo", videojuegoId => {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatchTo("videojuegos.nintendo.show-videojuegos-nintendo", 'borrarOkVideojuego', videojuegoId)
+                }
+            });
+        })
+
+        //Borrar el videojuego de pc
+        Livewire.on("confirmarBorrarVideojuegoPC", videojuegoId => {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatchTo("videojuegos.p-c.show-videojuegos-p-c", 'borrarOkVideojuego', videojuegoId)
+                }
+            });
+        })
+
+        //Borrar el videojuego de playstation
+        Livewire.on("confirmarBorrarVideojuegoPlayStation", videojuegoId => {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatchTo("videojuegos.play-station.show-videojuegos-play-station", 'borrarOkVideojuego', videojuegoId)
+                }
+            });
+        })
+
+        //Borrar el videojuego de xbox
+        Livewire.on("confirmarBorrarVideojuegoXbox", videojuegoId => {
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.dispatchTo("videojuegos.xbox.show-videojuegos-xbox", 'borrarOkVideojuego', videojuegoId)
                 }
             });
         })
